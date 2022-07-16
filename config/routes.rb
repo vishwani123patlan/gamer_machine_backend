@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  
+  #API ROUTES
+  namespace :api do
+    namespace :v1 do
+      post '/user/sign_in' => 'authentication#sign_in'
+      post  '/user/sign_up' => "registrations#sign_up"
+      resources :games, only: [:create, :show, :update, :destroy] 
+    end
+  end
+
+  #WEB ROUTES
   resources :games
   devise_for :super_admins
 
