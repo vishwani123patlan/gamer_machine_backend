@@ -1,5 +1,6 @@
-class Api::V1::GamesController < Api::V1::ApiController
+class Api::V1::Admin::GamesController < Api::V1::ApiController
 	before_action :authorize_request
+	before_action :is_admin
 	before_action :set_game, only: [:show, :update, :destroy]
 	def create
 		begin

@@ -15,4 +15,8 @@ class Api::V1::ApiController < ActionController::API
       render json: { errors: e.message }, status: :unauthorized
     end
   end
+
+  def is_admin
+  	render json: {error: true, errors: "Not Authorize"}, status: :unauthorized if (@current_user.role !="admin")
+  end
 end

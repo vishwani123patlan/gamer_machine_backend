@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/user/sign_in' => 'authentication#sign_in'
       post  '/user/sign_up' => "registrations#sign_up"
-      resources :games, only: [:create, :show, :update, :destroy] 
+      namespace :admin do 
+        resources :games, only: [:create, :show, :update, :destroy] 
+        resources :tournaments, only: [:create, :show, :update, :destroy]
+      end
     end
   end
 
