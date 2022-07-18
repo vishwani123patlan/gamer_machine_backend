@@ -8,7 +8,7 @@ class Team < ApplicationRecord
     ActiveRecord::Base.transaction do
       @team = Team.create!(team_name: team_name, user_id: user_id)
       params[:players].each do |player|
-      @team.players.create!(name: player[:name], phone_number: player[:phone_number], is_captain: player[:is_captain], team_id: @team.id)
+      	@team.players.create!(name: player[:name], phone_number: player[:phone_number], user_id: @team.user_id)
     	end
     end
 
