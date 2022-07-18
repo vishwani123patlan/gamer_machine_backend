@@ -3,12 +3,15 @@ Rails.application.routes.draw do
   #API ROUTES
   namespace :api do
     namespace :v1 do
-      post '/user/sign_in' => 'authentication#sign_in'
-      post  '/user/sign_up' => "registrations#sign_up"
+      #ADMIN API ROUTES
       namespace :admin do 
         resources :games, only: [:create, :show, :update, :destroy] 
         resources :tournaments, only: [:create, :show, :update, :destroy]
       end
+
+      post '/user/sign_in' => 'authentication#sign_in'
+      post  '/user/sign_up' => "registrations#sign_up"
+      resources :teams
     end
   end
 
