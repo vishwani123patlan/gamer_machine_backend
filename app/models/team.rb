@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
 	
-	has_and_belongs_to_many :players, join_table: :teams_palyers, dependent: :destroy
+	has_and_belongs_to_many :players, join_table: :teams_palyers,  dependent: :nullify
 	
 	def save(params)
     return false if invalid?

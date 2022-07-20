@@ -10,7 +10,7 @@ module Api
 					teams_serializer = @teams.map{|team| TeamSerializer.new(team).serializable_hash}
 					render json: {success: true, teams: teams_serializer}
 				rescue Exception => e
-					render json: { error: e.message }, status: :unprocessable_entity
+					render json: {success: false, errors: e.message }, status: :unprocessable_entity
 				end
 			end
 
@@ -23,10 +23,10 @@ module Api
 						team_serializer = TeamSerializer.new(team)
 						render json: {success: true, team: team_serializer}
 					else
-						render json: {error: true, errors: team.errors.full_messages}, status: :unprocessable_entity
+						render json: {success: false, errors: team.errors.full_messages}, status: :unprocessable_entity
 					end
 				rescue Exception => e
-					render json: { error: e.message }, status: :unprocessable_entity
+					render json: {success: false, errors: e.message }, status: :unprocessable_entity
 				end
 			end
 
