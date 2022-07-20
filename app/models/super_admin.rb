@@ -3,4 +3,8 @@ class SuperAdmin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

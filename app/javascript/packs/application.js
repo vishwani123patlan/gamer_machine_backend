@@ -7,20 +7,15 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-
+require('jquery')
+window.jQuery = $;
+window.$ = $;
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
 require("@popperjs/core")
-
 import "bootstrap"
-
-// Import the specific modules you may need (Modal, Alert, etc)
 import { Tooltip, Popover } from "bootstrap"
-
-// The stylesheet location we created earlier
-require("../stylesheets/application.scss")
 
 // If you're using Turbolinks. Otherwise simply use: jQuery(function () {
 document.addEventListener("turbolinks:load", () => {
@@ -36,6 +31,13 @@ document.addEventListener("turbolinks:load", () => {
     })
 })
 
+
+// The stylesheet location we created earlier
+
+require("../stylesheets/application.scss")
+require('admin/game')
+
+//SIDE BAR JS
 $(document).ready(function(){
 	// Sidebar Toggle Code
 	$(document).on('click', '#menu-btn', function(){
