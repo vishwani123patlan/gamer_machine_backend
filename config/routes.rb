@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   #WEB ROUTES
   resources :games
   devise_for :super_admins
-
   devise_scope :super_admin do 
     authenticated :super_admin do
       root 'games#index', as: :authenticated_root
