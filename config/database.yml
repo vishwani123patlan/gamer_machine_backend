@@ -10,12 +10,12 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   host: localhost
-  username: 'vishu'
-  password: 'password'
 
 development:
   <<: *default
   database: gamer_machine_dev
+  username: 'vishu'
+  password: 'password'
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
