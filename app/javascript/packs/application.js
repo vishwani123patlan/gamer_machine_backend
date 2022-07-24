@@ -38,7 +38,7 @@ document.addEventListener("turbolinks:load", () => {
 
 // The stylesheet location we created earlier
 
-require("../stylesheets/application.scss")
+require("../stylesheets/application")
 require('admin/datatable')
 //SIDE BAR JS
 $(document).ready(function(){
