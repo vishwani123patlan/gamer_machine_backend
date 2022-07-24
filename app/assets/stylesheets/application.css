@@ -18,3 +18,7 @@
 .profiler-results {
     display: none;
 }
+
+.error_message{
+    color: red;
+}

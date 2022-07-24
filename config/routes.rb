@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       #ADMIN API ROUTES
-      namespace :admin do 
-        resources :games, only: [:index, :create, :show, :update, :destroy] 
+      namespace :admin do
+        resources :games, only: [:index, :create, :show, :update, :destroy] do 
+          collection do 
+            get :game_types
+          end
+        end
         resources :tournaments, only: [:index, :create, :show, :update, :destroy]
       end
 
@@ -18,11 +22,13 @@ Rails.application.routes.draw do
   end
 
   #WEB ROUTES
+  resources :game_types
   resources :games
+  resources :tournaments
   devise_for :super_admins
   devise_scope :super_admin do 
     authenticated :super_admin do
-      root 'games#index', as: :authenticated_root
+      root 'tournaments#index', as: :authenticated_root
     end
 
     unauthenticated do

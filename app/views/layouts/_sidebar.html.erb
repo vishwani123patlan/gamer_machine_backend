@@ -3,18 +3,22 @@
 		<a href="#" class="nav-link h3 text-white my-2">
 		Gamers </br>Machine
 		</a>
-		<li href="#" class="nav-link">
-			<i class="bx bxs-dashboard"></i>
-			<span class="mx-2">Home</span>
-		</li>
-		<li href="#" class="nav-link">
-			<i class="bx bx-user-check"></i>
-			<span class="mx-2">Profile</span>
-		</li>
-		<a href="<%= destroy_super_admin_session_path%>" data-method="delete" >
-		<li href="#" class="nav-link">
-			Sign Out
-		</li>
+		<a class="nav-link" href="<%= tournaments_path %>">
+			<li>
+				<i class="bx bx-user-check"></i>
+				<span class="mx-2">Tournaments</span>
+			</li>
+		</a>
+		<a class="nav-link" href="<%= games_path %>">
+			<li>
+				<i class="bx bx-user-check"></i>
+				<span class="mx-2">Games</span>
+			</li>
+		</a>
+		<a class="nav-link" href="<%= destroy_super_admin_session_path%>" data-method="delete" >
+			<li>
+				Sign Out
+			</li>
 		</a>
 	</ul>
 

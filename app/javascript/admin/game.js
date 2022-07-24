@@ -1,3 +1,3 @@
-$(document).ready(function(){
-	$("#games-table").DataTable()
+$(document).on('turbolinks:load', function() {
+  console.log("hey",$("#tournaments-table"))
 })
