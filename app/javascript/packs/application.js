@@ -19,8 +19,7 @@ Turbolinks.start()
 ActiveStorage.start()
 global.$ = jQuery;
 require("@popperjs/core")
-import "bootstrap";
-import { Tooltip, Popover } from "bootstrap"
+import * as bootstrap from 'bootstrap'
 
 // The stylesheet location we created earlier
 
