@@ -10,8 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
   </head>
 
@@ -25,7 +24,7 @@
       <div  class="my-container active-cont">
         <% if super_admin_signed_in? %>
           <nav class="navbar top-navbar navbar-light bg-transparent px-5">
-            <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i></a>
+            <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i>=</a>
           </nav>
         <% end %>
         <%= yield %>
