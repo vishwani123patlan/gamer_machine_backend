@@ -59,7 +59,7 @@ module Api
 
 				def game_types
 					begin
-						@game_types = GameType.all
+						@game_types = GameType.all.map{|game_type| Api::V1::Admin::GameTypesSerializer.new(game_type).serializable_hash}
 						render json: {success: true, game_types: @game_types}
 					rescue Exception => e
 						render json: { error: e.message }, status: :unprocessable_entity

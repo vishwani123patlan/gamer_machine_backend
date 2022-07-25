@@ -16,7 +16,7 @@
 
   <div class="field">
     <%= form.label :game_type %>
-    <%= form.text_field :game_type %>
+    <%= form.select :game_type_id, options_for_select(GameType.all.map{|game_type| [game_type.game_type, game_type.id]}) %>
   </div>
 
   <div class="actions">

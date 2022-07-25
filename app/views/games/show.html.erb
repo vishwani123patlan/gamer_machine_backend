@@ -7,7 +7,7 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @game.game_type %>
+  <%= @game.game_type&.game_type %>
 </p>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
