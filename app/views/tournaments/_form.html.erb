@@ -1,0 +1,58 @@
+<%= form_for(@tournament) do |form| %>
+	<% if @tournament.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @tournament.errors.each do |error| %>
+          <li class="error_message"><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div class="field">
+		<%= form.label :name %>
+		<%= form.text_field :name %>
+	</div>
+	<div class="field">
+		<%= form.label :start_date %>
+		<%= form.date_field :start_date %>
+	</div>
+	<div class="field">
+		<%= form.label :end_date %>
+		<%= form.date_field :end_date %>
+	</div>
+	<div class="field">
+		<%= form.label 'Game' %>
+		<%= form.select :game_id, options_for_select(all_games(current_super_admin.id)) %>
+	</div>
+	<div class="field">
+		<%= form.label :entry_fee %>
+		<%= form.number_field :entry_fee %>
+	</div>
+	<div class="field">
+		<%= form.label :no_of_winners %>
+		<%= form.number_field :no_of_winners %>
+	</div>
+	<div class="field">
+		<%= form.label :max_team %>
+		<%= form.select :max_team, options_for_select(Tournament::MAX_TEAM) %>
+	</div>
+	<div class="field">
+		<%= form.label :status %>
+		<%= form.select :status, options_for_select(Tournament::STATUS) %>
+	</div>
+	<div class="field">
+		<%= form.label :winner_1_prize %>
+		<%= form.number_field :winner_1_prize %>
+	</div>
+	<div class="field">
+		<%= form.label :winner_2_prize %>
+		<%= form.number_field :winner_2_prize %>
+	</div>
+	<div class="field">
+		<%= form.label :winner_3_prize %>
+		<%= form.number_field :winner_3_prize %>
+	</div>
+	<div class="actions">
+		<%= form.submit %>
+	</div>
+<% end %>

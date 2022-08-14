@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :teams
       resources :players
       resources :tournament_registrations
+      get '/lastest_tournaments' => "tournament_registrations#latest_tournaments"
     end
   end
 

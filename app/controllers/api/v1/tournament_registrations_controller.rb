@@ -1,7 +1,14 @@
 module Api
 	module V1
 		class TournamentRegistrationsController < Api::V1::ApiController
-			before_action :authorize_request
+			before_action :authorize_request, except: [:latest_tournaments]
+
+
+			def latest_tournaments
+			  @tournaments = Tournament.pending#.where("start_date >= ?", Date.today)
+			  tournaments_serializer = @tournaments.map{|tournament| Api::V1::TournamentSerializer.new(tournament).serializable_hash}
+			  render json: {success: true, tournaments: tournaments_serializer}
+			end
 
 			def create
 				begin

@@ -15,7 +15,6 @@ module Api
 
       def show
         begin
-          debugger
           player_serializer = PlayerSerializer.new(@player).serializable_hash
           render json: {success: true, player: player_serializer}
         rescue Exception => e
@@ -29,7 +28,7 @@ module Api
           @player.user_id = @current_user.id
           if @player.save
             player_serializer = PlayerSerializer.new(@player).serializable_hash
-            render json: {success: true, player: player_serializer}
+            render json: {success: true, player: player_serializer, message: 'Player Created Successfully'}
           else
             render json: {success: false, errors: @player.errors.full_messages}, status: :unprocessable_entity
           end
@@ -74,7 +73,6 @@ module Api
       end
 
       def players_params
-        debugger
         params.require(:player).permit(:name, :phone_number)
       end
     end

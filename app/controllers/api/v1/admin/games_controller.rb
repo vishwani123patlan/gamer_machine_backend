@@ -5,6 +5,17 @@ module Api
 				before_action :authorize_request
 				before_action :is_admin
 				before_action :set_game, only: [:show, :update, :destroy]
+
+				def index
+					begin
+						@games = Game.where(gameable_id: @current_user.id)
+						game_serializer = @games.map{|game| Api::V1::Admin::GameSerializer.new(game).serializable_hash}
+						render json: {success: true, games: game_serializer}
+					rescue Exception => e
+						render json: { error: e.message }, status: :unprocessable_entity
+					end
+				end
+
 				def create
 					begin
 						@game = Game.new(game_params)
@@ -74,7 +85,8 @@ module Api
 				end
 
 				def game_params
-					params.require(:game).permit(:name, :game_type)
+					new_params = ActionController::Parameters.new(JSON.parse(params.require(:game)))
+					new_params.permit(:name, :game_type_id)
 				end
 			end
 		end
