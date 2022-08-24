@@ -10,6 +10,8 @@ class TournamentRegistrationService
 			if params[:team_id].present? 
 				register_for_tournament_with_existing_team(params[:team_id])
 			end
+		elsif(params[:team_type] == 2)
+			register_for_tournament_with_new_team_and_player(params[:team])
 		end
 	end
 
@@ -26,6 +28,29 @@ class TournamentRegistrationService
 		rescue Exception => e
 			return {success: false, errors: e.message}
 		end
+	end
+
+	def register_for_tournament_with_new_team_and_player(team_params)
+		Rails.logger.debug "-----> TournamentRegistrationService: Register for new teams and players with params #{team_params}"
+		begin
+			@team = Team.new(team_name: team_params[:team_name], user_id: @current_user.id)
+			team = @team.save(team_params_permit(team_params))
+			@participant_team = ParticipantTeam.new(team_id: team.id, team_name: team.team_name, tournament_id: @tournament.id, user_id: @current_user.id)
+			if @participant_team.save
+				return {success: true, participant_team: @participant_team}
+			else
+				return {success: false, errors: @participant_team.errors.full_messages}
+			end
+		rescue Exception => e
+			return {success: false, errors: e.message}
+		end
+		
+	end
+
+	private
+
+	def team_params_permit(params)
+		return params.permit!
 	end
 
 end
