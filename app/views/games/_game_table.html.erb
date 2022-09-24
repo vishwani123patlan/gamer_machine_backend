@@ -1,0 +1,24 @@
+<table id="games-table" class="dispaly table table-striped-5 border">
+  <thead style="background-color: rgb(0, 65, 114);" >
+    <tr>
+      <th scope="col" class="text-white fs-5">Name</th>
+      <th scope="col" class="text-white fs-5">Game Type</th>
+      <th scope="col" class="text-white fs-5">Created By</th>
+      <th scope="col" class="text-center text-white fs-5">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr class="text-start">
+        <td><%= game.name %></td>
+        <td><%= game.game_type&.game_type %></td>
+        <td><%= game.gameable.name %></td>
+        <td class="text-center">
+          <%= link_to 'Show', game, class:"btn btn-sm text-dark ", style:"background-color: #E2DE09;" %> | 
+          <%= link_to 'Edit', edit_game_path(game),class:"btn btn-sm text-white ", style:"background-color: green;" %> | 
+          <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-sm text-white ", style:"background-color: #B51C07;" %>
+        </td>
+      </tr>
+    <%end%>    
+  </tbody>
+</table>

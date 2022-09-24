@@ -1,25 +1,21 @@
-<%= form_with(model: game) do |form| %>
-  <% if game.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% game.errors.each do |error| %>
-          <li class="error_message"><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<hr class="featurette-divider m-3 text-dark">
+<div class="container my-3">
+      <%= form_with(model: game) do |form| %>
+        <div class="row mt-3">
+            <div class="col-md-4 fs-4">
+              <%= label_tag 'name' %><span class="required" style="color: red;">*</span>
+              <%= form.text_field :name, class: "f-control" %>
+              <p class='error'><%= show_errors(game, :name) %></p>
+            </div>
+            <div class="col-md-4 fs-4">
+              <%= label_tag 'game_type' %><span class="required" style="color: red;">*</span>
+              <%= form.select :game_type_id, options_for_select(GameType.all.map{|game_type| [game_type.game_type, game_type.id]}), class: "f-control" %>
+              <p class='error'><%= show_errors(game, :game_type_id) %></p>
+            </div>
+        </div>                
+      <div class="action mt-4 " align="center">
+        <%= form.submit 'Submit', class: "btn btn-success fs-5"%>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :game_type %>
-    <%= form.select :game_type_id, options_for_select(GameType.all.map{|game_type| [game_type.game_type, game_type.id]}) %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

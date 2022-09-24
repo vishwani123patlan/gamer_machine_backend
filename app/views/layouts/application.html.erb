@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"rel="stylesheet">
     <%#= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,20 +17,13 @@
   </head>
 
   <body>
-    <div class="wrapper d-flex">
+    <section class="d-flex">
       <% if super_admin_signed_in? %>
-      <div>
         <%= render 'layouts/sidebar' %>
-      </div>
       <% end %>
-      <div  class="my-container active-cont">
-        <% if super_admin_signed_in? %>
-          <nav class="navbar top-navbar navbar-light bg-transparent px-5">
-            <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i>=</a>
-          </nav>
-        <% end %>
+      <main>
         <%= yield %>
-      </div>
-    </div>
+      </main>
+    </section>    
   </body>
 </html>

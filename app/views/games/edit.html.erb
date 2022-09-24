@@ -1,6 +1,11 @@
-<h1>Editing Game</h1>
-
-<%= render 'form', game: @game %>
-
-<%= link_to 'Show', @game %> |
-<%= link_to 'Back', games_path %>
+<div class="container-fluid my-5 border rounded-4 shadow-lg">
+  <div class="row text-center pb-0 pe-lg-0 py-lg-3 align-items-center ">
+    <div class="col-2">
+      <%= link_to ('<i class="fa fa-arrow-left"></i>').html_safe, games_path, class:"mx-5 text-dark fs-2 align-items-start "%> 
+    </div>
+    <div class="col-8">
+      <h2 class="text-center">Updating Game</h2>    
+    </div>
+		<%= render 'form', game: @game %>
+  </div>
+</div>
