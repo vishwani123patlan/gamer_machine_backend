@@ -36,11 +36,22 @@ class TournamentsController < ApplicationController
       end
     end 
   end
+  def destroy
+    respond_to do |format|
+      if @tournament.destroy
+        format.html { redirect_to tournaments_path, notice: "Tournament was successfully Deleted." }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end 
+  end
+
+
 
   private
 
   def set_tournament
-    @tournament = Tournament.find params[:id]
+    @tournament = Tournament.find(params[:id])
   end
 
   def tournament_params

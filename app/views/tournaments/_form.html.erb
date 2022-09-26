@@ -1,58 +1,79 @@
-<%= form_for(@tournament) do |form| %>
-	<% if @tournament.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% @tournament.errors.each do |error| %>
-          <li class="error_message"><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<hr class="featurette-divider m-3 text-dark">
+<div class="container my-3">
+      <%= form_for(@tournament) do |f| %>
+        <div class="row mt-3">
+            <div class="col-md-4">
+              <%= label_tag 'name' %><span class="required" style="color: red;">*</span>
+              <%= f.text_field :name, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :name) %></p>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag 'start_date' %><span class="required" style="color: red;">*</span>
+              <%= f.date_field :start_date, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :start_date) %></p>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag 'end_date' %><span class="required" style="color: red;">*</span>
+              <%= f.date_field :end_date, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :end_date) %></p>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <%= label_tag 'Game' %><span class="required" style="color: red;">*</span>
+            <%= f.select :game_id, options_for_select(all_games(current_super_admin.id)),required: true, class: "f-control" %>
+            <p class='error'><%= show_errors(@tournament, :Game) %></p>
+          </div>
+          <div class="col-md-4">
+              <%= label_tag 'entry_fee' %><span class="required" style="color: red;">*</span>
+              <%= f.number_field :entry_fee, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :entry_fee) %></p>
+          </div>
+          <div class="col-md-4">
+              <%= label_tag 'no_of_winners' %><span class="required" style="color: red;">*</span>
+              <%= f.number_field :no_of_winners, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :no_of_winners) %></p>
+            </div>
+        </div>
+        <div class="row mt-3">
+         <div class="col-md-4">
+              <%= label_tag 'max_team' %><span class="required" style="color: red;">*</span>
+              <%= f.select :max_team, options_for_select(Tournament::MAX_TEAM),required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :max_team) %></p>
+          </div>
+          <div class="col-md-4">
+              <%= label_tag 'status' %><span class="required" style="color: red;">*</span>
+              <%= f.select :status, options_for_select(Tournament::STATUS) %>
+              <p class='error'><%= show_errors(@tournament, :status) %></p>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag 'winner_1_prize' %><span class="required" style="color: red;">*</span>
+              <%= f.number_field :winner_1_prize, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :winner_1_prize) %></p>
+            </div>
+      </div>
+        <div class="row mt-3">
+          <div class="col-md-4">
+              <%= label_tag 'winner_1_prize' %><span class="required" style="color: red;">*</span>
+              <%= f.number_field :winner_1_prize, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :winner_1_prize) %></p>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag 'winner_2_prize' %><span class="required" style="color: red;">*</span>
+              <%= f.number_field :winner_2_prize, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :winner_2_prize) %></p>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag 'winner_3_prize' %><span class="required" style="color: red;">*</span>
+              <%= f.number_field :winner_3_prize, required: false, class: "f-control" %>
+              <p class='error'><%= show_errors(@tournament, :winner_3_prize) %></p>
+            </div>
+        </div>
+
+      <div class="action mt-4" align="center">
+        <%= f.submit 'Submit', class: "btn btn-success"%>
+      </div>
     </div>
   <% end %>
-	<div class="field">
-		<%= form.label :name %>
-		<%= form.text_field :name %>
-	</div>
-	<div class="field">
-		<%= form.label :start_date %>
-		<%= form.date_field :start_date %>
-	</div>
-	<div class="field">
-		<%= form.label :end_date %>
-		<%= form.date_field :end_date %>
-	</div>
-	<div class="field">
-		<%= form.label 'Game' %>
-		<%= form.select :game_id, options_for_select(all_games(current_super_admin.id)) %>
-	</div>
-	<div class="field">
-		<%= form.label :entry_fee %>
-		<%= form.number_field :entry_fee %>
-	</div>
-	<div class="field">
-		<%= form.label :no_of_winners %>
-		<%= form.number_field :no_of_winners %>
-	</div>
-	<div class="field">
-		<%= form.label :max_team %>
-		<%= form.select :max_team, options_for_select(Tournament::MAX_TEAM) %>
-	</div>
-	<div class="field">
-		<%= form.label :status %>
-		<%= form.select :status, options_for_select(Tournament::STATUS) %>
-	</div>
-	<div class="field">
-		<%= form.label :winner_1_prize %>
-		<%= form.number_field :winner_1_prize %>
-	</div>
-	<div class="field">
-		<%= form.label :winner_2_prize %>
-		<%= form.number_field :winner_2_prize %>
-	</div>
-	<div class="field">
-		<%= form.label :winner_3_prize %>
-		<%= form.number_field :winner_3_prize %>
-	</div>
-	<div class="actions">
-		<%= form.submit %>
-	</div>
-<% end %>
+  </div>

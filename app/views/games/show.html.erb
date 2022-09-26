@@ -1,14 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid mt-5 border shadow-lg">
+  <div class="row text-center p-4 pb-0 pe-lg-0 py-lg-3 align-items-center border shadow-lg">
+    <div class="col-2">
+      <%= link_to ('<i class="fa fa-arrow-left"></i>').html_safe, tournaments_path, class:"mx-5 text-dark fs-2 align-items-start "%>  
+    </div>
+    <div class="col-8">
+      <h2 class="text-center"><%= @game.name%> / Tournament</h2>    
+    </div>
+        <div class="col-2">
+      <%= link_to "Edit", edit_game_path(@game), class:"btn btn-outline text-white btn-lg ", style:"background-color: rgb(0, 65, 114);"%>   
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @game.name %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @game.game_type&.game_type %>
-</p>
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<div class="container-fluid border shadow-lg mt-5 " style="width: 100%;">
+  <div class="row text-center p-4 pb-0 pe-lg-0 py-lg-3 align-items-center border shadow-lg">
+    <div class="col">
+      <div class="container border shadow-sm my-5">
+        <div class="row mt-3 text-start"> 
+          <div class="col-md-4">
+            <p> (Name) :</p>
+            <p class="fw-bold fs-3"><%= @game.name %></p>
+          </div>  
+          <div class="col-md-4">
+            <p> (Game Type) :</p>
+            <p class="fw-bold fs-3"><%= @game.game_type&.game_type %>)</p>
+          </div>
+      </div>
+    </div>  
+  </div>
+</div>    
