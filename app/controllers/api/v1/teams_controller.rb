@@ -16,12 +16,12 @@ module Api
 
 			def create
 				begin
-					@team = Team.new(team_params.except(:players))
+					@team = Team.new(team_params.except(:players, :existing_players))
 					@team.user_id = @current_user.id
 					team = @team.save(team_params)
 					if team.present?
 						team_serializer = TeamSerializer.new(team)
-						render json: {success: true, team: team_serializer}
+						render json: {success: true, team: team_serializer, message: 'Team Created Successfuly!'}
 					else
 						render json: {success: false, errors: team.errors.full_messages}, status: :unprocessable_entity
 					end

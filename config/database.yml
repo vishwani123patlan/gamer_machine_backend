@@ -14,7 +14,7 @@ default: &default
 development:
   <<: *default
   database: gamer_machine_dev
-  username: 'vishu'
+  username: 'postgres'
   password: 'password'
 
 # Warning: The database defined as "test" will be erased and
@@ -23,6 +23,8 @@ development:
 test:
   <<: *default
   database: gamer_machine_test
+  username: 'postgres'
+  password: 'password'
 
 production:
   <<: *default

@@ -7,9 +7,10 @@ module Api
         	@user.password_confirmation = @user.password
           if @user.save
             token = JsonWebToken.encode(user_id: @user.id)
+            time = Time.now + 24.hours.to_i
             @redirect_headers = "?token=#{token}&email=#{@user.email}"
             #UserMailer.send_verification_link(@user,  @redirect_headers).deliver_now
-          	render json: {success: true, data: {user: @user}, message: 'User Created Successfully'}
+          	render json: {success: true, data: {user: @user}, token: token, exp_time: time, message: 'User Created Successfully'}
           else
             render json: {success: false, error: @user.errors}, status: 422
           end
