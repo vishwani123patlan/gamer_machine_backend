@@ -10,12 +10,12 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   host: localhost
+  username: vishu123
+  password: password
 
 development:
   <<: *default
   database: gamer_machine_dev
-  username: 'postgres'
-  password: 'password'
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -23,9 +23,33 @@ development:
 test:
   <<: *default
   database: gamer_machine_test
-  username: 'postgres'
-  password: 'password'
 
 production:
   <<: *default
   database: gamer_machine
+
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+#   host: localhost
+
+# development:
+#   <<: *default
+#   database: gamer_machine_dev
+#   username: 'postgres'
+#   password: 'password'
+
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#   <<: *default
+#   database: gamer_machine_test
+#   username: 'postgres'
+#   password: 'password'
+
+# production:
+#   <<: *default
+#   database: gamer_machine
