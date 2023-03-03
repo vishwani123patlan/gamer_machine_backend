@@ -12,6 +12,8 @@ class TournamentRegistrationService
 			end
 		elsif(params[:team_type] == 2)
 			register_for_tournament_with_new_team_and_player(params[:team])
+		else
+			register_for_tournament_by_super_admin(params)
 		end
 	end
 
@@ -34,7 +36,7 @@ class TournamentRegistrationService
 		Rails.logger.debug "-----> TournamentRegistrationService: Register for new teams and players with params #{team_params}"
 		begin
 			@team = Team.new(team_name: team_params[:team_name], user_id: @current_user.id)
-			team = @team.save(team_params_permit(team_params))
+			team = @team.save_team(team_params_permit(team_params))
 			@participant_team = ParticipantTeam.new(team_id: team.id, team_name: team.team_name, tournament_id: @tournament.id, user_id: @current_user.id)
 			if @participant_team.save
 				return {success: true, participant_team: @participant_team}
@@ -44,7 +46,6 @@ class TournamentRegistrationService
 		rescue Exception => e
 			return {success: false, errors: e.message}
 		end
-		
 	end
 
 	private

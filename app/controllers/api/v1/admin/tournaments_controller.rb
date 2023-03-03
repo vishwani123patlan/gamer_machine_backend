@@ -3,7 +3,7 @@ module Api
 		module Admin
 			class TournamentsController < Api::V1::ApiController
 				before_action :authorize_request
-				before_action :is_admin
+				#before_action :is_admin
 				before_action :set_tournament, only: [:show, :update, :destroy]
 
 				def index
@@ -24,7 +24,7 @@ module Api
 							render json: {success: true, tournament: @tournament, message: 'Tournament created successfully!'}
 						else
 							render json: {error: @tournament.errors.full_message}
-						end		
+						end
 					rescue Exception => e
 						render json: {error: e.message}, status: :unprocessable_entity
 					end
@@ -40,7 +40,7 @@ module Api
 							render json: {success: true, tournament: @tournament, message: 'Tournament updated successfully!'}
 						else
 							render json: {error: @tournament.errors.full_message}
-						end		
+						end
 					rescue Exception => e
 						render json: {error: e.message}, status: :unprocessable_entity
 					end
@@ -52,7 +52,7 @@ module Api
 							render json: {success: true, message: 'Tournament Deleted successfully!'}
 						else
 							render json: {error: @tournament.errors.full_message}
-						end		
+						end
 					rescue Exception => e
 						render json: {error: e.message}, status: :unprocessable_entity
 					end

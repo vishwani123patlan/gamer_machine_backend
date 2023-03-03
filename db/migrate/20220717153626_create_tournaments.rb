@@ -3,7 +3,7 @@ class CreateTournaments < ActiveRecord::Migration[6.1]
     create_table :tournaments do |t|
       t.bigint  :tournamentable_id
       t.string  :tournamentable_type
-      t.references :game, index: true
+      t.bigint :game_id, index: true
       t.string :name
       t.datetime :start_date
       t.datetime :end_date

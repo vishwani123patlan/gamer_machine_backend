@@ -4,7 +4,9 @@ class SuperAdmin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :teams, as: :teamable, dependent: :destroy
+
   def name
-    "#{first_name} #{last_name}"
+    "Super Admin"
   end
 end

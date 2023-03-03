@@ -9,7 +9,7 @@ module Api
         if @user&.authenticate(params[:password])
           token = JsonWebToken.encode(user_id: @user.id)
           time = Time.now + 24.hours.to_i
-          user_serializer = UserSerializer.new(@user).serializable_hash
+            user_serializer = UserSerializer.new(@user).serializable_hash
           render json: {success: true, token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
                          user: user_serializer, message: "Log in successfully!" }
         else

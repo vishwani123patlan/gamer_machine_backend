@@ -11,6 +11,12 @@ class Tournament < ApplicationRecord
 	#VALIDATIONS
 	validates :name, :start_date, :end_date, presence: true
 
+	NO_OF_WINNERS = {
+		1 => 1,
+		2 => 2,
+		3 => 3
+	}
+
 	MAX_TEAM = {
 		'25' => 25,
 		'50' => 50,

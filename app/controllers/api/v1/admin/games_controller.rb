@@ -3,7 +3,7 @@ module Api
 		module Admin
 			class GamesController < Api::V1::ApiController
 				before_action :authorize_request
-				before_action :is_admin
+				#before_action :is_admin
 				before_action :set_game, only: [:show, :update, :destroy]
 
 				def index

@@ -1,0 +1,12 @@
+<fieldset>
+	<div>
+		<%= f.label :team_name %>
+		<%= f.text_field :team_name %>
+	</div>
+	<div>
+		<%= f.fields_for :players do |player_builder| %>
+			<%= render "tournament_registrations/player_fields", f: player_builder %>
+		<% end %>
+	</div>
+	<%= link_to_add_fields "Add Player", f, :players %>
+</fieldset>

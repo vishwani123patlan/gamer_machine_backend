@@ -34,7 +34,7 @@ class TournamentsController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
-    end 
+    end
   end
   def destroy
     respond_to do |format|
@@ -43,7 +43,7 @@ class TournamentsController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
-    end 
+    end
   end
 
 
@@ -51,7 +51,7 @@ class TournamentsController < ApplicationController
   private
 
   def set_tournament
-    @tournament = Tournament.find(params[:id])
+    @tournament = Tournament.includes(:participant_teams).find(params[:id])
   end
 
   def tournament_params

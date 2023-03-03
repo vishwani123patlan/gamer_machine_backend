@@ -16,13 +16,13 @@
         <td><%= tournament.game&.name %></td>
         <td><%= tournament.tournamentable.name %></td>
         <td><%= tournament.participant_teams.count %></td>
-        <td><%= tournament.status %></td>
+        <td><%= tournament.status&.capitalize %></td>
         <td class="text-center">
-          <%= link_to 'Show', tournament, class:"btn btn-sm text-dark ", style:"background-color: #E2DE09;" %> | 
-          <%= link_to 'Edit', edit_tournament_path(tournament),class:"btn btn-sm text-white ", style:"background-color: green;" %> | 
+          <%= link_to 'Show', tournament, class:"btn btn-sm text-dark ", style:"background-color: #E2DE09;" %> |
+          <%= link_to 'Edit', edit_tournament_path(tournament),class:"btn btn-sm text-white ", style:"background-color: green;" %> |
           <%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-sm text-white ", style:"background-color: #B51C07;" %>
         </td>
       </tr>
-    <%end%>    
+    <%end%>
   </tbody>
 </table>

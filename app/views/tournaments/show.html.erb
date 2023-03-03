@@ -1,13 +1,13 @@
 <div class="container-fluid mt-5 border rounded-4 shadow-lg">
   <div class="row text-center p-4 pb-0 pe-lg-0 py-lg-3 align-items-center border shadow-lg">
   	<div class="col-2">
-  		<%= link_to ('<i class="fa fa-arrow-left"></i>').html_safe, tournaments_path, class:"mx-5 text-dark fs-2 align-items-start "%>	
+  		<%= link_to ('<i class="fa fa-arrow-left"></i>').html_safe, tournaments_path, class:"mx-5 text-dark fs-2 align-items-start "%>
   	</div>
   	<div class="col-7">
-			<h2 class="text-center"> Tournament (<%= @tournament.id %>) </h2>		
+			<h2 class="text-center">  </h2>
   	</div>
   	  	<div class="col-3">
-			<%= link_to 'Add Team For Tournament',new_tournament_tournament_registration_path(@tournament),class:"btn text-white fs-5", style:"background-color: rgb(0, 65, 114);" %>		
+			<%= link_to 'Add Team For Tournament', new_tournament_tournament_registration_path(@tournament),class:"btn text-white fs-5", style:"background-color: rgb(0, 65, 114);" %>
   	</div>
   </div>
 </div>
@@ -15,64 +15,81 @@
 <div class="container-fluid border shadow-lg mt-5 " style="width: 100%;">
 	<div class="row text-center p-4 pb-0 pe-lg-0 py-lg-3 align-items-center border shadow-lg">
 		<div class="col">
-			<div class="container-fluid border shadow-sm my-5">
+      <h4>Tournament Details</h4>
+			<div class="container-fluid border shadow-sm my-3">
 				<div class="row mt-3 text-start">
 					<div class="col-md-4">
-						<p> (Name) : </p> 
-						<p class="fw-bold fs-3"><%= @tournament.name %></p>
-					</div>	
+						<p><strong>Name:</strong> <%= @tournament.name %></p>
+					</div>
 					<div class="col-md-4 ">
-						<p> (Start Date) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.start_date %></p>
+						<p><strong>Date: </strong> <%= @tournament.start_date&.strftime("%d/%b/%Y") %> - <%= @tournament.end_date&.strftime("%d/%b/%Y") %> </p>
 					</div>
-					<div class="col-md-4">
-						<p> (End_Date) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.end_date %></p>
+          <div class="col-md-4">
+						<p><strong>Created By :</strong> <%= @tournament.tournamentable&.name %> </p>
 					</div>
 				</div>
-				<div class="row mt-3 text-start">	
+				<div class="row mt-3 text-start">
 					<div class="col-md-4">
-						<p> (Tournament Type) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.tournamentable_type %></p>
+						<p> <strong>Game:</strong> <%= (@tournament.game.name) %></p>
+						<p class="fw-bold fs-3"></p>
 					</div>
 					<div class="col-md-4">
-						<p> (Game Id) : </p>
-						<p class="fw-bold fs-3"><%= (@tournament.game_id) %></p>
+						<p><strong> Entry Fee:</strong> <%= @tournament.entry_fee %></p>
 					</div>
-					<div class="col-md-4">
-						<p> (Entry Fee) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.entry_fee %></p>
+          <div class="col-md-4">
+						<p><strong>Number of Winners:</strong> <%= @tournament.no_of_winners %></p>
 					</div>
 				</div>
-				<div class="row mt-3 text-start">	
-					<div class="col-md-4">
-						<p> (Number of Winners) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.no_of_winners %></p>
+				<div class="row mt-3 text-start">
+	        <div class="col-md-4">
+						<p><strong>Winner 1 Prize:</strong> <%= @tournament.winner_1_prize %></p>
 					</div>
-					<div class="col-md-4">
-						<p> (Winner 1 Prize) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.winner_1_prize %></p>
+          <div class="col-md-4">
+						<p><strong>Winner 2 Prize:</strong> <%= @tournament.winner_2_prize %></p>
 					</div>
-					<div class="col-md-4">
-						<p> (Winner 2 Prize) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.winner_2_prize %></p>
+          <div class="col-md-4">
+						<p><strong>Winner 3 Prize:</strong> <%= @tournament.winner_3_prize %></p>
 					</div>
 				</div>
-				<div class="row mt-3 text-start">	
+				<div class="row mt-3 text-start">
 					<div class="col-md-4">
-						<p> (Winner 3 Prize) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.winner_3_prize %></p>
-					</div>	
-					<div class="col-md-4">
-						<p> (Total Teams) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.max_team %>)</p>
+						<p><strong>Max Team Participate:</strong> <%= @tournament.max_team %></p>
 					</div>
 					<div class="col-md-4">
-						<p> (Status) : </p>
-						<p class="fw-bold fs-3"><%= @tournament.status %>)</p>
+						<p><strong>Status:</strong> <%= @tournament.status %></p>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
-</div>		
+</div>
+
+<div class="participated_teams">
+  <div class="container-fluid border shadow-lg mt-5 " style="width: 100%;">
+  	<div class="row text-center p-4 pb-0 pe-lg-0 py-lg-3 align-items-center border shadow-lg">
+      <div class="col">
+        <h4>Teams</h4>
+  			<div class="container-fluid border shadow-sm my-3">
+          <table class="table">
+            <thead>
+              <th>Team Name</th>
+              <th>Players</th>
+              <th>Payment</th>
+              <th>Participated Date</th>
+            </thead>
+            <tbody>
+              <% @tournament.participant_teams.each do |participant_team| %>
+                <tr>
+                  <td><%= participant_team.team.team_name %></td>
+                  <td><%= participant_team.team.players.count %></td>
+                  <td>Done</td>
+                  <td><%= participant_team.created_at.strftime("%d-%m-%Y") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

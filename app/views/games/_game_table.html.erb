@@ -12,7 +12,7 @@
       <tr class="text-start">
         <td><%= game.name %></td>
         <td><%= game.game_type&.game_type %></td>
-        <td><%= game.gameable.name %></td>
+        <td><%= game.gameable.email %></td>
         <td class="text-center">
           <%= link_to 'Show', game, class:"btn btn-sm text-dark ", style:"background-color: #E2DE09;" %> | 
           <%= link_to 'Edit', edit_game_path(game),class:"btn btn-sm text-white ", style:"background-color: green;" %> | 

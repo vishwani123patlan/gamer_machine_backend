@@ -1,9 +1,10 @@
 class CreateParticipantTeams < ActiveRecord::Migration[6.1]
   def change
     create_table :participant_teams do |t|
-      t.references :user, null: false, index: true
-      t.references :tournament, null: false, index: true
-      t.references :team, null: false, index: true
+      t.bigint :participantable_id
+      t.string :participantable_type
+      t.bigint :tournament_id, index: true
+      t.bigint :team_id, index: true
       t.string :team_name
       t.boolean :is_grouped, default: false
 

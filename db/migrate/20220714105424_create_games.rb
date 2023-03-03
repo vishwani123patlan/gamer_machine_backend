@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
       t.bigint :gameable_id
       t.string :gameable_type
       t.string :name
-      t.string :game_type
+      t.bigint :game_type_id, index: true
 
       t.timestamps
     end

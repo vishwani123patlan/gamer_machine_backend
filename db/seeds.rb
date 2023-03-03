@@ -15,10 +15,11 @@ game_types.each do |game_type|
 end
 
 games = Game.all.pluck(:id)
-user  = User.first
+User.find_or_create_by!(id: 1, first_name: 'user1', last_name: 'name', email: 'user@gmail.com', password_digest: '123456', phone_number: '9876543211', role: 'user')
+user  = SuperAdmin.first
 if user.present?
 	(1..50).each do |num|
-		tounament = Tournament.new(name: SecureRandom.hex(4), game_id: games.sample, tournamentable_id: user.id, tournamentable_type: "User", no_of_winners: [1,2,3].sample, entry_fee: [250, 500, 700, 1000].sample, winner_1_prize: 2100, max_team: [25, 100, 50].sample, status: ["pending", "completed", "cancled", "running"].sample, start_date: (Date.today + [3,4,6,7,8,8,10].sample.day), end_date: (Date.today + [24,25,26,23,26,29,30].sample.days))
+		tounament = Tournament.new(name: SecureRandom.hex(4), game_id: games.sample, tournamentable_id: user.id, tournamentable_type: "SuperAdmin", no_of_winners: [1,2,3].sample, entry_fee: [250, 500, 700, 1000].sample, winner_1_prize: 2100, max_team: [25, 100, 50].sample, status: ["pending", "completed", "cancled", "running"].sample, start_date: (Date.today + [3,4,6,7,8,8,10].sample.day), end_date: (Date.today + [24,25,26,23,26,29,30].sample.days))
 		tounament.save!
 	end
 end

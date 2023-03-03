@@ -1,0 +1,24 @@
+<div>
+	<%= form_for @team do |f| %>
+		<% if @team.errors.present? %>
+			<% @team.errors.each do |error| %>
+				<p><%= error.full_message %></p>
+			<% end %>
+		<% end %>
+		<fieldset>
+			<div>
+				<%= f.label :team_name %>
+				<%= f.text_field :team_name, class: 'form-control w-50', required: true %>
+			</div>
+			<div>
+        <%= f.fields_for "players" do |player_builder| %>
+          <%= render "teams/player_fields_edit", f: player_builder %>
+        <% end %>
+			</div>
+			<%= link_to_add_fields "Add Player", f, :players, {class: "add_fields btn btn-success add_players_button"} %>
+	</fieldset>
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	<% end %>
+</div>

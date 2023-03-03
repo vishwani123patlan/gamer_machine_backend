@@ -1,0 +1,60 @@
+
+<%= form_for @participant_team, url: tournament_tournament_registrations_path(tournament_id: @tournament.id) do |form| %>
+  <div class="container">
+		<div class="errors">
+			<% if @participant_team.errors.present? %>
+				<% @participant_team.errors.each do |error| %>
+					<p><%= error.full_message %></p>
+				<% end %>
+			<% end %>
+		</div>
+		<%= form.hidden_field :team_id, value: '' %>
+    <div class="team_list_form mb-3">
+      <% @teams.each do |team| %>
+    		<div class="m-5 row">
+    			<div class="col-sm-1 col-md-1 col-lg-1 col-xs-1 team-registration-radio">
+            <% participated_teams_ids = @tournament.participant_teams.pluck(:team_id) %>
+            <% if !participated_teams_ids.include?(team.id) %>
+    				    <%= form.radio_button :team_id, team.id, value: team.id%>
+            <% else %>
+              <span><i class="fa fa-check" aria-hidden="true" style="font-size: 25px; color: green; border: 4px solid green"></i></i></span>
+            <% end %>
+    			</div>
+    			<div class="col-sm-11 col-md-11 col-lg-11 col-xs-11">
+    				<div class="accordion" id="teamAccordion_<%= team.id %>">
+    					<div class="accordion-item">
+    						<h2 class="accordion-header" id="headingOne">
+    							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTeam_<%= team.id%>" aria-expanded="true" aria-controls="collapseOne">
+    								<%= team.team_name %>
+    							</button>
+    						</h2>
+    						<div id="collapseTeam_<%= team.id%>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#teamAccordion_<%= team.id %>">
+    							<div class="accordion-body">
+    								<div class="contianer">
+                      <% team.players.each do |player| %>
+    									  <div class="row">
+    											<div class="d-flex justify-content-between">
+                            <div>
+                              <%= player.name %>
+                            </div>
+                            <div>
+                              <%= player.phone_number %>
+                            </div>
+    											</div>
+    									  </div>
+                        <hr>
+                      <% end %>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	<% end %>
+    </div>
+		<div class="ms-5 actions" float="right">
+			<%= form.submit "Save", class: 'btn w-50 btn-success ms-5', float: 'right' %>
+		</div>
+	</div>
+<% end %>

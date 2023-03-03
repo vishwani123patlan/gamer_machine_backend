@@ -22,7 +22,6 @@ class GameTypesController < ApplicationController
   # POST /game_types or /game_types.json
   def create
     @game_type = GameType.new(game_type_params)
-
     respond_to do |format|
       if @game_type.save
         format.html { redirect_to game_type_url(@game_type), notice: "Game type was successfully created." }

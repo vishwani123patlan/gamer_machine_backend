@@ -3,9 +3,9 @@ class User < ApplicationRecord
 
 	has_secure_password
 
+	has_many :teams, as: :teamable, dependent: :destroy
 	validates :email, uniqueness: true
-	validates :email, :first_name, :last_name, :role, :phone_number, presence: true
-
+	validates :email, :first_name, :last_name, :role, presence: true
 
 	def name
 		"#{first_name} #{last_name}"

@@ -4,12 +4,12 @@
         <div class="row mt-3">
             <div class="col-md-4 fs-4">
               <%= label_tag 'name' %><span class="required" style="color: red;">*</span>
-              <%= form.text_field :name, class: "f-control" %>
+              <%= form.text_field :name, class: "form-control" %>
               <p class='error'><%= show_errors(game, :name) %></p>
             </div>
             <div class="col-md-4 fs-4">
               <%= label_tag 'game_type' %><span class="required" style="color: red;">*</span>
-              <%= form.select :game_type_id, options_for_select(GameType.all.map{|game_type| [game_type.game_type, game_type.id]}), class: "f-control" %>
+              <%= form.select :game_type_id, options_for_select(GameType.all.map{|game_type| [game_type.game_type, game_type.id]}),{}, class: "form-select" %>
               <p class='error'><%= show_errors(game, :game_type_id) %></p>
             </div>
         </div>                

@@ -19,9 +19,9 @@ module Api
         end
       end
 
-      def is_admin
-      	render json: {error: true, errors: "Not Authorize"}, status: :unauthorized if (@current_user.role !="admin")
-      end
+      # def is_admin
+      # 	render json: {error: true, errors: "Not Authorize"}, status: :unauthorized if (@current_user.role !="admin")
+      # end
     end
   end
 end
