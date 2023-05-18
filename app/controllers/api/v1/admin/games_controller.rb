@@ -8,11 +8,34 @@ module Api
 
 				def index
 					begin
-						@games = Game.where(gameable_id: @current_user.id)
+						@games = @current_user.games.includes(:game_type)
 						game_serializer = @games.map{|game| Api::V1::Admin::GameSerializer.new(game).serializable_hash}
 						render json: {success: true, games: game_serializer}
 					rescue Exception => e
 						render json: { error: e.message }, status: :unprocessable_entity
+					end
+				end
+
+				def get_all_games
+					begin
+						
+						# Fetch games created by current user or super admins
+						games = Game.joins("LEFT OUTER JOIN users ON gameable_type = 'User' AND gameable_id = users.id")
+						            .joins("LEFT OUTER JOIN super_admins ON gameable_type = 'SuperAdmin' AND gameable_id = super_admins.id")
+						            .where("(gameable_type = 'User' AND gameable_id = ?) OR super_admins.id IS NOT NULL", @current_user.id)
+						            .select("games.*")
+						# Group games by gameable_type
+						games_by_type = games.group_by(&:gameable_type)
+
+						# Build the result hash
+						games_hash = {
+						  super_admin_games: games_by_type['SuperAdmin']&.map{|game| {id: game.id, name: game.name}} || [],
+						  your_games: games_by_type['User']&.map{|game| {id: game.id, name: game.name}} || []
+						}
+
+						render json: {success: true, games_data: games_hash}
+					rescue Exception => e
+						render json: {success: false, errors: e.message}, status: :unprocessable_entity
 					end
 				end
 
@@ -86,7 +109,7 @@ module Api
 
 				def game_params
 					new_params = ActionController::Parameters.new(JSON.parse(params.require(:game)))
-					new_params.permit(:name, :game_type_id)
+					new_params.permit(:id, :name, :game_type_id)
 				end
 			end
 		end

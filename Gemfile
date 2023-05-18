@@ -20,13 +20,14 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+gem 'faker'
 gem 'devise', '~>4.0'
 gem 'omniauth-google-oauth2'
 gem 'google-id-token'
 
-gem "rack-cors", require: "rack/cors"
+gem 'rack-cors', require: 'rack/cors'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'active_model_serializers', '~> 0.10.0'
@@ -48,6 +49,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'dotenv-rails'
+  gem 'rubocop', require: false
 end
 
 group :test do

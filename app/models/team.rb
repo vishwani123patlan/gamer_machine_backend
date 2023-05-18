@@ -14,15 +14,12 @@ class Team < ApplicationRecord
     ActiveRecord::Base.transaction do
       @team = Team.create!(team_name: team_name, user_id: user_id)
       # params[:players] IS FOR API SECTION AND params[:players_attributes] IS FOR SUPER ADMIN SECTION
-      if params[:players].present?
-        params[:players].each do |player|
-        	@team.players.create!(name: player[:name], phone_number: player[:phone_number], user_id: @team.user_id)
-      	end
-      elsif params[:players_attributes].present?
-        params[:players_attributes].to_h.each do |key, player|
-          @team.players.create!(name: player[:name], phone_number: player[:phone_number], user_id: @team.user_id)
+      if players = params[:players].presence || params[:players_attributes]&.to_h
+        players.each do |player|
+          @team.players.create(name: player[:name], phone_number: player[:phone_number], user_id: @team.user_id)
         end
       end
+      
       if params[:existing_players].present?
         params[:existing_players].each do |existing_player_id|
           TeamsPlayer.create!(team_id: @team.id, player_id: existing_player_id)

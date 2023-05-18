@@ -5,7 +5,7 @@ class TournamentRegistrationService
 	end
 
 	def register_for_tournament(params)
-		Rails.logger.debug "-----> TournamentRegistrationService: Start Registeration"
+		Rails.logger.debug '-----> TournamentRegistrationService: Start Registeration'
 		if (params[:team_type] == 1)
 			if params[:team_id].present? 
 				register_for_tournament_with_existing_team(params[:team_id])

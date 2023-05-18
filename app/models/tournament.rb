@@ -10,6 +10,9 @@ class Tournament < ApplicationRecord
 
 	#VALIDATIONS
 	validates :name, :start_date, :end_date, presence: true
+	validates :end_date, comparison: { comparison_attr: :start_date, message: "must be greater than start date" }
+  	validates :start_date, comparison: { comparison_attr: :end_date, operator: :<, message: "must be less than end date" }
+
 
 	NO_OF_WINNERS = {
 		1 => 1,
@@ -29,4 +32,13 @@ class Tournament < ApplicationRecord
 		'Completed' => 'completed',
 		'Cancled' => 'cancled'
 	}
+
+	private
+
+	def check_start_end_date
+	    unless end_date > start_date
+	    	debugger
+	      errors.add(:end_date, "end date should be greater than start date")
+	    end
+ 	end
 end

@@ -3,6 +3,7 @@ module Api
     class PlayersController < Api::V1::ApiController
       before_action :authorize_request
       before_action :set_player, only: [:show, :update, :destroy]
+      
       def index
         begin
           @players = Player.where(user_id: @current_user.id)

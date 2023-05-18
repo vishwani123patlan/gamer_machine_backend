@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         resources :games, only: [:index, :create, :show, :update, :destroy] do
           collection do
             get :game_types
+            get :get_all_games
           end
         end
         resources :tournaments, only: [:index, :create, :show, :update, :destroy]

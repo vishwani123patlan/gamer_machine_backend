@@ -8,7 +8,7 @@ module Api
 
 				def index
 					begin
-						@tournaments = Tournament.where(tournamentable_id: @current_user_id)
+						@tournaments = Tournament.all
 						tournaments_serializer = @tournaments.map{|tournament| TournamentSerializer.new(tournament).serializable_hash}
 						render json: {success: true, tournaments: tournaments_serializer}
 					rescue Exception => e
@@ -23,7 +23,7 @@ module Api
 						if @tournament.save
 							render json: {success: true, tournament: @tournament, message: 'Tournament created successfully!'}
 						else
-							render json: {error: @tournament.errors.full_message}
+							render json: {sucess: false, error: @tournament.errors.full_messages&.first}, status: :unprocessable_entity
 						end
 					rescue Exception => e
 						render json: {error: e.message}, status: :unprocessable_entity

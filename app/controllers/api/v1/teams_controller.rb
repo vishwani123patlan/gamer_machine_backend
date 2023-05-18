@@ -5,9 +5,9 @@ module Api
 
 			def index
 				begin
-					@teams = Team.where(user_id: @current_user.id)
+					teams = Team.where(user_id: @current_user.id)
 					#teams_serializer = TeamSerializer.new(@teams).serializable_hash
-					teams_serializer = @teams.map{|team| TeamSerializer.new(team).serializable_hash}
+					teams_serializer = teams.map{|team| TeamSerializer.new(team).serializable_hash}
 					render json: {success: true, teams: teams_serializer}
 				rescue Exception => e
 					render json: {success: false, errors: e.message }, status: :unprocessable_entity
