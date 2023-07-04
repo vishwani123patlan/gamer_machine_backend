@@ -43,6 +43,7 @@ module Api
 					begin
 						@game = Game.new(game_params)
 						@game.gameable = @current_user
+						#@game.game_logo = game_params["game_logo"] if game_params["game_logo"].present?
 						if @game.save
 							render json: {success: true, data: {game: @game}, message: 'Game Created Successfully!'}
 						else
@@ -108,8 +109,7 @@ module Api
 				end
 
 				def game_params
-					new_params = ActionController::Parameters.new(JSON.parse(params.require(:game)))
-					new_params.permit(:id, :name, :game_type_id)
+					params.require(:game).permit(:id, :name, :game_type_id, :game_logo)
 				end
 			end
 		end

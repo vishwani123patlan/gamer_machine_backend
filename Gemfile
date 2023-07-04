@@ -26,6 +26,7 @@ gem 'faker'
 gem 'devise', '~>4.0'
 gem 'omniauth-google-oauth2'
 gem 'google-id-token'
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 
 gem 'rack-cors', require: 'rack/cors'
 # Use Active Storage variant

@@ -5,6 +5,8 @@ class Tournament < ApplicationRecord
 	has_many :matches, dependent: :destroy
 	has_many :groups, dependent: :destroy
 
+	mount_uploader :banner, BannerUploader
+
 	#SCOPES
 	scope :pending, -> { where(status: 'pending')}
 

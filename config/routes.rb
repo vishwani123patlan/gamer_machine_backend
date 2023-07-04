@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :platforms
   get 'teams/index'
   get 'teams/new'
   get 'teams/show'

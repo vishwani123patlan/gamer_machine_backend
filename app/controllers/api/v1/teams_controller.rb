@@ -16,7 +16,8 @@ module Api
 
 			def create
 				begin
-					@team = Team.new(team_params.except(:players, :existing_players))
+					debugger
+					@team = @current_user.teams.new(team_params)
 					@team.user_id = @current_user.id
 					team = @team.save(team_params)
 					if team.present?

@@ -61,7 +61,7 @@ module Api
 				private
 
 				def tournament_params
-					params.require(:tournament).permit(:name, :game_id, :start_date, :end_date, :entry_fee, :winner_1_prize, :winner_2_prize, :winner_3_prize, :max_team, :no_of_winners, :status)
+					params.require(:tournament).permit(:name, :game_id, :start_date, :end_date, :entry_fee, :winner_1_prize, :winner_2_prize, :winner_3_prize, :max_team, :no_of_winners, :status, :platform, :banner)
 				end
 
 				def set_tournament

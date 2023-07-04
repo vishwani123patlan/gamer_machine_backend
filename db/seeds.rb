@@ -53,26 +53,26 @@ require 'faker'
 # end
 
 # Define the possible status options
-STATUS_OPTIONS = ['pending', 'running', 'completed', "cancled"]
+#STATUS_OPTIONS = ['pending', 'running', 'completed', "cancled"]
 
 # Generate 10 tournaments
-100.times do
-  Tournament.create(
-    tournamentable_id: Faker::Number.between(from: 1, to: 10),
-    tournamentable_type: ["SuperAdmin", "User"].sample,
-    game_id: Faker::Number.between(from: 1, to: 10),
-    name: Faker::Esport.event,
-    start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 5.days),
-    end_date: Faker::Time.between(from: DateTime.now + 6.days, to: DateTime.now + 20.days),
-    entry_fee: Faker::Number.decimal(l_digits: 2),
-    winner_1_prize: Faker::Number.decimal(l_digits: 4),
-    winner_2_prize: Faker::Number.decimal(l_digits: 3),
-    winner_3_prize: Faker::Number.decimal(l_digits: 2),
-    no_of_winners: Faker::Number.between(from: 1, to: 3),
-    max_team: [10,25,50,100].sample,
-    status: STATUS_OPTIONS.sample # randomly select one of the options
-  )
-end
+# 100.times do
+#   Tournament.create(
+#     tournamentable_id: Faker::Number.between(from: 1, to: 10),
+#     tournamentable_type: ["SuperAdmin", "User"].sample,
+#     game_id: Faker::Number.between(from: 1, to: 10),
+#     name: Faker::Esport.event,
+#     start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 5.days),
+#     end_date: Faker::Time.between(from: DateTime.now + 6.days, to: DateTime.now + 20.days),
+#     entry_fee: Faker::Number.decimal(l_digits: 2),
+#     winner_1_prize: Faker::Number.decimal(l_digits: 4),
+#     winner_2_prize: Faker::Number.decimal(l_digits: 3),
+#     winner_3_prize: Faker::Number.decimal(l_digits: 2),
+#     no_of_winners: Faker::Number.between(from: 1, to: 3),
+#     max_team: [10,25,50,100].sample,
+#     status: STATUS_OPTIONS.sample # randomly select one of the options
+#   )
+# end
 
 
 # games = Game.all.pluck(:id)
@@ -84,3 +84,7 @@ end
 # 		tounament.save!
 # 	end
 # end
+
+['PC', 'PlayStation', 'PlayStation 4', 'PlayStation 5', "Mobile"].each do |platform_name|
+	Platform.find_or_create_by(name: platform_name)
+end
